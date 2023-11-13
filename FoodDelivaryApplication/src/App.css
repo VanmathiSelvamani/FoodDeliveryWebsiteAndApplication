@@ -1,0 +1,46 @@
+.App-header {
+  background-image: url('./backgng.jpg');
+  background-size: cover;
+  background-color: #58657efb;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+form {
+  max-width: 400px; /* Set maximum width for the form */
+ /* margin: 0 auto; /* Center the form horizontally */
+  
+  padding: 20px;
+  border-radius: 8px; /* Add some border-radius for rounded corners */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+}
+label {
+  display: block;
+  margin-bottom: 10px;
+}
+input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #751313;
+  border-radius: 4px;
+}
+button {
+  COLOR : #0c414f;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+button:hover {
+  background-color: #74e1f2; /* Darker green color on hover */
+}
+.App-link {
+  color: #61dafb;
+  margin-top: 20px;
+}
+
