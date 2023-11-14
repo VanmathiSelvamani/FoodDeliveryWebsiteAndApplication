@@ -1,0 +1,109 @@
+// App.js
+import React, { useState } from 'react';
+import './App.css';
+import { initializeApp } from 'firebase/app';
+import { getFirestore, addDoc, collection } from "firebase/firestore";
+
+function App() {
+  // State variables to store form data
+  const [name, setName] = useState('');
+  const [address, setAddress] = useState('');
+  const [foodItem, setFoodItem] = useState('');
+
+  // Function to handle form submission
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Add logic to handle form submission, e.g., send data to a server
+    console.log('Form submitted:', { name, address, foodItem });
+    // Clear the form fields after submission if needed
+    setName('');
+    setAddress('');
+    setFoodItem('');
+  };
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBm7hUx-CPXLM9ff8aSWU1Yh7Vx9P4gGpo",
+    authDomain: "delicious-paradise-d42e9.firebaseapp.com",
+    projectId: "delicious-paradise-d42e9",
+    storageBucket: "delicious-paradise-d42e9.appspot.com",
+    messagingSenderId: "1046967761467",
+    appId: "1:1046967761467:web:d4e894a7a18c8e16a5fa1e",
+    measurementId: "G-NSZZBBR1R5"
+  };
+
+  initializeApp(firebaseConfig);
+
+  const sendDataToFirebase = async () => {
+
+    await addDoc(collection(firestore, "userOrderedData"), {
+      name: name,
+      address: address,
+      foodItem: foodItem
+    });
+
+    alert('Ordered Successfully');
+  }
+
+
+  const firestore = getFirestore();
+
+
+  return (
+    <div className="App">
+      <header className="App-header">
+        <h1>Welcome to Delicious Paradise</h1>
+
+
+        {/* Food order form */}
+        <form onSubmit={handleSubmit}>
+          <label>
+            Name:
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
+          </label>
+          <br />
+          <label>
+            Address:
+            <input
+              type="text"
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+              required
+            />
+          </label>
+          <br />
+          <label>
+            Food Item:
+            <input
+              type="text"
+              value={foodItem}
+              onChange={(e) => setFoodItem(e.target.value)}
+              required
+            />
+          </label>
+          <br />
+
+          <button type="submit" onClick={sendDataToFirebase} >Place Order</button>
+
+        </form>
+
+        {/* Link to visit the site (you can remove or modify this) */}
+        <a
+          className="App-link"
+          href="file:///C:/Users/vanma/OneDrive/Desktop/bootStrap/task1.html"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Visit Our Site
+        </a>
+      </header>
+    </div>
+  );
+}
+
+export default App;
+

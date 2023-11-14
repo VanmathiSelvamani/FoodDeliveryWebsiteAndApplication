@@ -1,0 +1,70 @@
+
+
+const firebaseConfig = {
+        apiKey: "AIzaSyCoX7zz4mwQ9ubcKPadmy7nvD4aPv4MLYo",
+        authDomain: "fooddeliveryappform.firebaseapp.com",
+        databaseURL: "https://fooddeliveryappform-default-rtdb.firebaseio.com",
+        projectId: "fooddeliveryappform",
+        storageBucket: "fooddeliveryappform.appspot.com",
+        messagingSenderId: "577153873856",
+        appId: "1:577153873856:web:776cdff8ea45464b667a25",
+        measurementId: "G-K6476N6K1P"
+      };
+// Initialize Firebase
+
+firebase.initializeApp(firebaseConfig);
+firebase.analytics();
+
+
+// Reference messages collection
+var messagesRef = firebase.database().ref('messages');
+
+// Listen for form submit
+document.getElementById('foodDeliveryFormData');
+document.addEventListener('submit', submitForm);
+const db = firebase.collection("foodDeliveryFormData");
+
+// Submit form
+function submitForm(e){
+    e.preventDefault();
+
+    //Get value
+    let email= getInputVal('email');
+    let password = getInputVal('password');
+    let location = getInputVal('location');
+    let cuisine = getInputVal('cuisine')
+  
+
+    // Save message
+    saveMessage(email, password, location, cuisine);
+
+
+    // Show alert
+    document.querySelector('.alert').style.display = 'block';
+
+    // Hide alert after 3 seconds
+    setTimeout(function(){
+        document.querySelector('.alert').style.display = 'none';
+    },3000);
+
+    // Clear form
+    document.getElementById('foodDeliveryForm').reset();
+}
+
+// Function to get form value
+function getInputVal(id){
+    return document.getElementById(id).value;
+}
+
+
+// Save message to firebase
+function saveMessage(email, password, location, cuisine){
+    var newMessageRef = messagesRef.push();
+    newMessageRef.set({
+        email: email,
+        password:password,
+        location:location,
+        cuisine:cuisine
+    
+    });
+}
